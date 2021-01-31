@@ -13,4 +13,19 @@ $CONFIG = array (
      'host' => '{{redis_hostname}}',
      'port' => {{redis_port}},
   ],
+  'objectstore' => [
+        'class' => '\\OC\\Files\\ObjectStore\\S3',
+        'arguments' => [
+                'bucket' => 'jocke-test',
+                'autocreate' => false,
+                'key'    => 'S7ACS7FBUC7I4SADE7JD',
+                'secret' => 'vjnoa6TNLKBQAYYTpqMtCpspilnWA15Zo4WPb6JG',
+                'hostname' => '13.48.138.35',
+                'port' => 80,
+                'use_ssl' => false,
+                'region' => '',
+                // required for some non Amazon S3 implementations
+                'use_path_style'=>false
+        ],
+  ],
 );

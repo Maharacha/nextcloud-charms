@@ -1,0 +1,63 @@
+series: bionic
+applications:
+  ceph-mon:
+    charm: cs:ceph-mon-51
+    num_units: 3
+    to:
+    - "3"
+    - "4"
+    - "5"
+    constraints: instance-type=t3.micro
+  ceph-osd:
+    charm: cs:ceph-osd-306
+    num_units: 3
+    to:
+    - "0"
+    - "1"
+    - "2"
+    constraints: instance-type=t3.micro
+    storage:
+      osd-devices: ebs,2G
+  ceph-radosgw:
+    charm: cs:ceph-radosgw-292
+    num_units: 1
+    to:
+    - "6"
+    expose: true
+    constraints: instance-type=t3.micro
+  postgresql:
+    charm: cs:postgresql-215
+    num_units: 1
+    to:
+    - "7"
+    constraints: instance-type=t3.micro
+  # nextcloud:
+  #   charm: ./nextcloud.charm
+  #   num_units: 1
+  #   to:
+  #   - "8"
+  #   constraints: instance-type=t3.micro
+machines:
+  "0":
+    constraints: instance-type=t3.micro
+  "1":
+    constraints: instance-type=t3.micro
+  "2":
+    constraints: instance-type=t3.micro
+  "3":
+    constraints: instance-type=t3.micro
+  "4":
+    constraints: instance-type=t3.micro
+  "5":
+    constraints: instance-type=t3.micro
+  "6":
+    constraints: instance-type=t3.micro
+  "7":
+    constraints: instance-type=t3.micro
+relations:
+- - ceph-mon:osd
+  - ceph-osd:mon
+- - ceph-mon:radosgw
+  - ceph-radosgw:mon
+# - - postgresql:db
+#   - nextcloud:db
